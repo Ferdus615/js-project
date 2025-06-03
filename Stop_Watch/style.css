@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: brown;
+  font-family: Array-Wide;
+  /* letter-spacing: 0.1em; */
+  color: burlywood;
+
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  border: 3px solid burlywood;
+  border-radius: 10px;
+  padding: 30px 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+.timer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 350px;
+
+  gap: 20px;
+  font-size: 5em;
+  margin: 20px 0px;
+}
+
+.hours,
+.minutes,
+.seconds {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 350px;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.resetBtn,
+.pauseBtn,
+.startBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 50px;
+
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: font-size 0.25s ease;
+}
+.resetBtn:hover,
+.pauseBtn:hover,
+.startBtn:hover {
+  font-size: 1.2em;
+}
+.resetBtn:active,
+.pauseBtn:active,
+.startBtn:active {
+  font-size: 1em;
+}
+
+@font-face {
+  font-family: Array-Wide;
+  src: url("fonts/Array-Wide.woff2") format("woff2"),
+    url("fonts/Array-Wide.woff") format("woff"),
+    url("fonts/Array-Wide.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
