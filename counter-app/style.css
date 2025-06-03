@@ -4,6 +4,12 @@ body {
   margin: 0;
   padding: 20px;
   text-align: center;
+  background-color: #684aff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
@@ -15,7 +21,7 @@ body {
   border-radius: 10px;
   padding: 30px;
 
-  background-color: burlywood;
+  background-color: #9883ff;
 }
 
 .left {
