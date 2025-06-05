@@ -1,0 +1,83 @@
+function generate() {
+  const showPassword = document.getElementById("showPassword");
+  const passwordLength = parseInt(document.getElementById("passwordLength").value, 10); // Convert input to number
+  const addLowerChar = document.getElementById("addLowerChar").checked; // Check if selected
+  const addUpperChar = document.getElementById("addUpperChar").checked; // Check if selected
+  const addNumber = document.getElementById("addNumber").checked;       // Check if selected
+  const addSymbol = document.getElementById("addSymbol").checked;       // Check if selected
+
+  function generatePassword(
+    length,
+    addLowerChar,
+    addUpperChar,
+    addNumber,
+    addSymbol
+  ) {
+    const lowercaseChar = "abcdefghijklmnopqrstuvwxyz";
+    const uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numberChars = "0123456789";
+    const symbolChars = "!@#$%^&*(){}[]-_=+''|?/>.<,:;";
+
+    let allowedChar = "";
+    let password = "";
+
+    // Add selected character sets
+    if (addLowerChar) allowedChar += lowercaseChar;
+    if (addUpperChar) allowedChar += uppercaseChar;
+    if (addNumber) allowedChar += numberChars;
+    if (addSymbol) allowedChar += symbolChars;
+
+    // Validation checks
+    if (length < 8 || length > 12) {
+      return "The password must be between 8 and 12 characters long.";
+    }
+    if (allowedChar.length === 0) {
+      return "You have to choose at least one set of characters.";
+    }
+
+    // Ensure at least one character from each selected type
+    const requiredChars = [];
+    if (addLowerChar) requiredChars.push(lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)]);
+    if (addUpperChar) requiredChars.push(uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)]);
+    if (addNumber) requiredChars.push(numberChars[Math.floor(Math.random() * numberChars.length)]);
+    if (addSymbol) requiredChars.push(symbolChars[Math.floor(Math.random() * symbolChars.length)]);
+
+    // Fill the remaining characters
+    for (let i = requiredChars.length; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * allowedChar.length);
+      password += allowedChar[randomIndex];
+    }
+
+    // Combine required characters and random characters
+    password += requiredChars.join('');
+    // Shuffle to make the password more random
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
+
+    return password;
+  }
+
+  const password = generatePassword(
+    passwordLength,
+    addLowerChar,
+    addUpperChar,
+    addNumber,
+    addSymbol
+  );
+
+  // Update the password display
+  showPassword.textContent = password;
+
+  console.log(password);
+}
+
+
+
+let password = "";
+    const randomValues = new Uint32Array(Length);
+    window.crypto.getRandomValues(randomValues); // Generate secure random numbers
+
+    for (let i = 0; i < Length; i++) {
+      const randomIndex = randomValues[i] % selectedChars.length;
+      console.log(`${randomIndex} = ${selectedChars[randomIndex]}`);
+      password += selectedChars[randomIndex];
+    }

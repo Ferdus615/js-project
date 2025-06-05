@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Helvetica;
+  text-align: center;
+}
+
+.container {
+  border: 5px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px black;
+  padding: 25px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  padding-bottom: 36px;
+  color: brown;
+}
+
+.passValueText {
+  padding-bottom: 15px;
+  font-size: 20px;
+}
+.passValue {
+  padding-bottom: 20px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="number"] {
+  background: transparent;
+  outline: none;
+  text-align: center;
+
+  border: 3px solid black;
+  border-radius: 50px;
+  padding: 8px;
+  width: 175px;
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.selectBox {
+  /* display: flex; */
+}
+.label {
+  font-size: 18px;
+  border: 1px solid black;
+  border-radius: 50px;
+  width: 350px;
+  padding: 10px;
+  margin: 10px;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  border: 4px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 15px;
+
+  color: brown;
+  background-color: darkgray;
+  transition: background-color 0.25s;
+}
+button:hover {
+  background-color: gray;
+}
+button:active {
+  background-color: rgb(161, 161, 161);
+}
+
+#showPassword {
+  margin-top: 25px;
+  background-color: brown;
+  border-radius: 25px;
+  color: azure;
+  padding: 10px;
+
+  font-size: 18px;
+}
+
+.errMsg {
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+}
+
+#copy {
+  height: 20px;
+  position: relative;
+  left: 80px;
+  cursor: pointer;
+}
