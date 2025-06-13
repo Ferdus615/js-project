@@ -67,6 +67,29 @@ h1 {
   width: 80%;
   max-width: 800px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  position: inherit;
+}
+
+#showCard {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(209, 163, 47);
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+#deal {
+  background-color: rgb(209, 163, 47);
+  color: #292929;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* position: relative;
+  bottom: -400px; */
 }
 
 footer {
