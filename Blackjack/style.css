@@ -78,6 +78,14 @@ h1 {
   justify-content: center;
   margin: 10px;
 }
+#trackCard {
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(209, 163, 47);
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
 
 #deal {
   background-color: rgb(209, 163, 47);
