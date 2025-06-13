@@ -7,6 +7,7 @@ let totalValue = 0;
 
 const showCard = document.getElementById("showCard");
 const trackCard = document.getElementById("trackCard");
+const msg = document.getElementById("msg");
 
 const dealCard = () => {
   const newCard = randomNumber(1, 13);
@@ -14,20 +15,6 @@ const dealCard = () => {
 
   //   const allDealtCard = generatedCard.push(newCard);
   //   trackCard.textContent = allDealtCard; //shows the number of cards dealt, not the cards themselves
-  trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
-  console.log(generatedCard);
-
-  totalValue += newCard;
-  console.log(totalValue);
-
-  if (totalValue === 21) {
-    trackCard.textContent = "Blackjack!";
-  } else if (totalValue > 21) {
-    trackCard.textContent = "Bust!";
-    totalValue = 0; // Reset totalValue after bust
-    generatedCard.length = 0; // Clear the dealt cards
-    showCard.textContent = ""; // Clear the displayed card
-  }
 
   switch (newCard) {
     case 1:
@@ -72,5 +59,27 @@ const dealCard = () => {
     default:
       generatedCard.push((showCard.textContent = "Error"));
       break;
+  }
+
+  trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
+  console.log(generatedCard);
+
+  totalValue += newCard;
+  console.log(totalValue);
+
+  if (totalValue === 21) {
+    alert("Blackjack!");
+
+    totalValue = 0; // Reset totalValue after bust
+    generatedCard.length = 0; // Clear the dealt cards
+    showCard.textContent = ""; // Clear the displayed card
+    trackCard.textContent = ""; // Clear the tracked cards
+  } else if (totalValue > 21) {
+    alert("Bust!");
+
+    totalValue = 0; // Reset totalValue after bust
+    generatedCard.length = 0; // Clear the dealt cards
+    showCard.textContent = ""; // Clear the displayed card
+    trackCard.textContent = ""; // Clear the tracked cards
   }
 };
