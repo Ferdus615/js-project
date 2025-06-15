@@ -4,13 +4,15 @@ const randomNumber = (min, max) => {
 
 const generatedCard = [];
 let totalValue = 0;
+const hasBlakJack = false;
 
 const showCard = document.getElementById("showCard");
 const trackCard = document.getElementById("trackCard");
 const msg = document.getElementById("msg");
+const dealCard = document.getElementById("dealbtn");
 
-const dealCard = () => {
-  const newCard = randomNumber(1, 13);
+const dealCardBtn = () => {
+  const newCard = randomNumber(1, 13); // Generate a random card value between 1 and 13
   showCard.textContent = newCard;
 
   //   const allDealtCard = generatedCard.push(newCard);
@@ -64,17 +66,21 @@ const dealCard = () => {
   trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
   console.log(generatedCard);
 
-  totalValue += newCard;
+  totalValue += newCard; // Add the value of the new card to totalValue
   console.log(totalValue);
 
-  if (totalValue === 21) {
+  if (totalValue < 21) {
+    
+  } else if (totalValue === 21) {
     alert("Blackjack!");
 
+    hasBlakJack = true; // Set the blackjack flag to true
+    dealCard.disabled = true; // Disable the deal card button
     totalValue = 0; // Reset totalValue after bust
     generatedCard.length = 0; // Clear the dealt cards
     showCard.textContent = ""; // Clear the displayed card
     trackCard.textContent = ""; // Clear the tracked cards
-  } else if (totalValue > 21) {
+  } else {
     alert("Bust!");
 
     totalValue = 0; // Reset totalValue after bust

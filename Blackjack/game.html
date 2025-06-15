@@ -9,15 +9,22 @@
   </head>
   <body>
     <h1>BlackJack</h1>
-    <p class="info">
-      In this game, you will play against the dealer. The goal is to get as
-      close to 21 as possible without going over.
-    </p>
+
     <!-- --------------------------------------------------------------------------------------------- -->
+    <!-- <div class="customAlert" id="customAlert">
+      <div class="dealNextCardAlert" id="dealNextCardAlert">
+        <p class="alertText">You can only deal a card once per turn.</p>
+        <button class="DealCardAlert" onclick="DealCardAlert()">
+          Deal Card
+        </button>
+        <button class="CashOutAlert" onclick="CashOutAlert()">Cash Out</button>
+      </div>
+    </div> -->
+
     <div class="game" id="game">
       <p id="showCard"></p>
       <span id="trackCard">Card Dealt: </span>
-      <button id="dealbtn" onclick="dealCard()">Deal Card</button>
+      <button id="dealbtn" onclick="dealCardBtn()">Deal Card</button>
     </div>
     <!-- ------------------------------------------------------------------------------------------------- -->
     <footer>
