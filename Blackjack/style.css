@@ -97,7 +97,14 @@ h1 {
   justify-content: center;
   margin: 10px;
 }
-#dealbtn {
+
+.gBtns {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+#dealbtn,
+#resetGame {
   background-color: rgb(209, 163, 47);
   color: #292929;
   border: none;
@@ -106,8 +113,7 @@ h1 {
   font-size: 1.2rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* position: relative;
-  bottom: -400px; */
+  margin: 10px;
 }
 
 #msg {
