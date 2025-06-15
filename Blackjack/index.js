@@ -17,63 +17,81 @@ const resetBtn = document.getElementById("resetGame");
 // the reset button
 const resetGame = () => {
   totalValue = 0; // Reset totalValue
+  hasBlakJack = false; // Reset the blackjack flag
+  hasBusted = false; // Reset the busted flag
+  isGameStarted = false; // Reset the game state
   generatedCard.length = 0; // Clear the dealt cards
   showCard.textContent = ""; // Clear the displayed card
-  trackCard.textContent = ""; // Clear the tracked cards
-  hasBlakJack = false; // Reset the blackjack flag
+  trackCard.textContent = ""; // Clear the dealt cards
+  msg.textContent = ""; // Clear the message
   dealCard.disabled = false; // Enable the deal card button
 };
 
 const deal = () => {
-  const newCard = randomNumber(1, 13); // Generate a random card value between 1 and 13
-  showCard.textContent = newCard;
+  const newCardNum = randomNumber(1, 13); // Generate a random card value between 1 and 13
+  let cardRealValue; // Initialize cardValue with the newCardNum value
+  let cardSymbol; // Initialize cardsymbol to store the card suit
+  // const cardSuit = randomNumber(1, 4); // Generate a random suit value between 1 and 4
 
-  switch (newCard) {
+  switch (newCardNum) {
     case 1:
-      generatedCard.push((showCard.textContent = "A"));
+      cardRealValue = 11; // Ace is worth 11 points
+      cardSymbol = "A"; // Assign a suit symbol (e.g., Spades)
       break;
     case 11:
-      generatedCard.push((showCard.textContent = "J"));
+      cardRealValue = 10; // Jack is worth 10 points
+      cardSymbol = "J"; // Assign a suit symbol (e.g., Hearts)
       break;
     case 12:
-      generatedCard.push((showCard.textContent = "Q"));
+      cardRealValue = 10; // Queen is worth 10 points
+      cardSymbol = "Q"; // Assign a suit symbol (e.g., Hearts)
       break;
     case 13:
-      generatedCard.push((showCard.textContent = "K"));
+      cardRealValue = 10; // King is worth 10 points
+      cardSymbol = "K"; // Assign a suit symbol (e.g., Hearts)
       break;
     default:
-      generatedCard.push((showCard.textContent = newCard));
+      cardRealValue = newCardNum; // King is worth 10 points
+      cardSymbol = String(newCardNum); // Assign a suit symbol (e.g., Hearts)
       break;
   }
 
+  generatedCard.push(cardSymbol); // Add the card symbol to the generatedCard array
+
+  totalValue += cardRealValue; // Add the value of the new card to totalValue
+  console.log(totalValue);
+
+  showCard.textContent = cardSymbol; // shows the last dealt card
+
   trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
   console.log(generatedCard);
-
-  totalValue += newCard; // Add the value of the new card to totalValue
-  console.log(totalValue);
 };
 
 // Card dealing button
 const dealCardBtn = () => {
-  if (isGameStarted) {
-    deal();
-    if (totalValue === 21) {
-      hasBlakJack = true; // Set the blackjack flag
-      alert("Blackjack! You win!");
-      dealCard.disabled = true; // Disable the deal card button
-    } else if (totalValue > 21) {
-      hasBusted = true;
-      alert("Busted! Total value exceeded 21.");
-    } else {
-      alert(`Current total value: ${totalValue}`);
-    }
-  } else {
+  if (!isGameStarted) {
+    resetGame(); // Reset the game state if it hasn't started
     deal();
     deal();
     isGameStarted = true; // Set the game as started
+  } else {
+    deal(); // Deal a new card if the game is already started
+  }
+
+  if (totalValue === 21) {
+    hasBlakJack = true; // Set the blackjack flag
+    msg.textContent = "Blackjack! You win!";
+    dealCard.disabled = true; // Disable the deal card button
+  } else if (totalValue > 21) {
+    hasBusted = true;
+    msg.textContent = "Busted! Total value exceeded 21.";
+  } else {
+    msg.textContent = `Current total value: ${totalValue}`;
   }
 
   if (hasBusted || hasBlakJack) {
     dealCard.disabled = true; // Disable the deal card button if the game is over
+    isGameStarted = false; // Reset the game state
+    msg.textContent += "";
   }
 };
