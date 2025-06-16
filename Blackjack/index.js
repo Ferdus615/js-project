@@ -1,85 +1,118 @@
 const randomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + 1);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 const generatedCard = [];
 let totalValue = 0;
+let hasBlakJack = false;
+let hasBusted = false;
+let isGameStarted = false;
 
 const showCard = document.getElementById("showCard");
 const trackCard = document.getElementById("trackCard");
 const msg = document.getElementById("msg");
+const dealCard = document.getElementById("dealBtn");
+const resetBtn = document.getElementById("resetGame");
+const alertBox = document.getElementById("customAlertBox");
 
-const dealCard = () => {
-  const newCard = randomNumber(1, 13);
-  showCard.textContent = newCard;
+// the reset button
+const resetGame = () => {
+  totalValue = 0; // Reset totalValue
+  hasBlakJack = false; // Reset the blackjack flag
+  hasBusted = false; // Reset the busted flag
+  isGameStarted = false; // Reset the game state
+  generatedCard.length = 0; // Clear the dealt cards
+  showCard.textContent = ""; // Clear the displayed card
+  trackCard.textContent = ""; // Clear the dealt cards
+  msg.textContent = ""; // Clear the message
+  dealCard.disabled = false; // Enable the deal card button
+};
 
-  //   const allDealtCard = generatedCard.push(newCard);
-  //   trackCard.textContent = allDealtCard; //shows the number of cards dealt, not the cards themselves
+const deal = () => {
+  const newCardNum = randomNumber(1, 13); // Generate a random card value between 1 and 13
+  let cardRealValue; // Initialize cardValue with the newCardNum value
+  let cardSymbol; // Initialize cardsymbol to store the card suit
+  const cardSuit = randomNumber(1, 4); // Generate a random suit value between 1 and 4
+  let cardSuitSymbol; // Initialize cardSuitSymbol to store the card suit symbol
 
-  switch (newCard) {
+  switch (cardSuit) {
     case 1:
-      generatedCard.push((showCard.textContent = "A"));
+      cardSuitSymbol = "♠"; // Spades
       break;
     case 2:
-      generatedCard.push((showCard.textContent = "2"));
+      cardSuitSymbol = "♥"; // Hearts
       break;
     case 3:
-      generatedCard.push((showCard.textContent = "3"));
+      cardSuitSymbol = "♦"; // Diamonds
       break;
     case 4:
-      generatedCard.push((showCard.textContent = "4"));
-      break;
-    case 5:
-      generatedCard.push((showCard.textContent = "5"));
-      break;
-    case 6:
-      generatedCard.push((showCard.textContent = "6"));
-      break;
-    case 7:
-      generatedCard.push((showCard.textContent = "7"));
-      break;
-    case 8:
-      generatedCard.push((showCard.textContent = "8"));
-      break;
-    case 9:
-      generatedCard.push((showCard.textContent = "9"));
-      break;
-    case 10:
-      generatedCard.push((showCard.textContent = "10"));
-      break;
-    case 11:
-      generatedCard.push((showCard.textContent = "J"));
-      break;
-    case 12:
-      generatedCard.push((showCard.textContent = "Q"));
-      break;
-    case 13:
-      generatedCard.push((showCard.textContent = "K"));
+      cardSuitSymbol = "♣"; // Clubs
       break;
     default:
-      generatedCard.push((showCard.textContent = "Error"));
+      cardSuitSymbol = "?"; // Unknown suit
       break;
   }
 
-  trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
-  console.log(generatedCard);
+  switch (newCardNum) {
+    case 1:
+      cardRealValue = 11; // Ace is worth 11 points
+      cardSymbol = "A"; // Assign a suit symbol (e.g., Spades)
+      break;
+    case 11:
+      cardRealValue = 10; // Jack is worth 10 points
+      cardSymbol = "J"; // Assign a suit symbol (e.g., Hearts)
+      break;
+    case 12:
+      cardRealValue = 10; // Queen is worth 10 points
+      cardSymbol = "Q"; // Assign a suit symbol (e.g., Hearts)
+      break;
+    case 13:
+      cardRealValue = 10; // King is worth 10 points
+      cardSymbol = "K"; // Assign a suit symbol (e.g., Hearts)
+      break;
+    default:
+      cardRealValue = newCardNum; // King is worth 10 points
+      cardSymbol = String(newCardNum); // Assign a suit symbol (e.g., Hearts)
+      break;
+  }
 
-  totalValue += newCard;
+  cardSymbol = `${cardSymbol}${cardSuitSymbol}`; // Combine the card symbol with its suit symbol
+  generatedCard.push(cardSymbol); // Add the card symbol to the generatedCard array
+
+  totalValue += cardRealValue; // Add the value of the new card to totalValue
   console.log(totalValue);
 
+  showCard.textContent = cardSymbol; // shows the last dealt card
+
+  trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
+  console.log(generatedCard);
+};
+
+// Card dealing button
+const dealCardBtn = () => {
+  if (!isGameStarted) {
+    resetGame(); // Reset the game state if it hasn't started
+    deal();
+    deal();
+    isGameStarted = true; // Set the game as started
+  } else {
+    deal(); // Deal a new card if the game has already started
+  }
+
   if (totalValue === 21) {
-    alert("Blackjack!");
-
-    totalValue = 0; // Reset totalValue after bust
-    generatedCard.length = 0; // Clear the dealt cards
-    showCard.textContent = ""; // Clear the displayed card
-    trackCard.textContent = ""; // Clear the tracked cards
+    hasBlakJack = true; // Set the blackjack flag
+    msg.textContent = "Blackjack! You win!";
+    dealCard.disabled = true; // Disable the deal card button
   } else if (totalValue > 21) {
-    alert("Bust!");
+    hasBusted = true;
+    msg.textContent = "Busted! Total value exceeded 21.";
+  } else {
+    msg.textContent = `Current total value: ${totalValue}`;
+  }
 
-    totalValue = 0; // Reset totalValue after bust
-    generatedCard.length = 0; // Clear the dealt cards
-    showCard.textContent = ""; // Clear the displayed card
-    trackCard.textContent = ""; // Clear the tracked cards
+  if (hasBusted || hasBlakJack) {
+    dealCard.disabled = true; // Disable the deal card button if the game is over
+    isGameStarted = false; // Reset the game state
+    msg.textContent += "";
   }
 };

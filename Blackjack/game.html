@@ -9,17 +9,31 @@
   </head>
   <body>
     <h1>BlackJack</h1>
-    <p class="info">
-      In this game, you will play against the dealer. The goal is to get as
-      close to 21 as possible without going over.
-    </p>
+
     <!-- --------------------------------------------------------------------------------------------- -->
+
+    <div class="customAlertBox" id="customAlertBox">
+      <div class="customAlertContent" id="customAlertContent">
+        <h3 class="alertText">Are you sure you want to proceed?</h3>
+        <button id="hitBtn" onclick="hitBtn()">Hit</button>
+        <button id="standBtn" onclick="standBtn()">Stand</button>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------------------------------- -->
+
     <div class="game" id="game">
       <p id="showCard"></p>
       <span id="trackCard"></span>
-      <button id="dealbtn" onclick="dealCard()">Deal Card</button>
+      <div class="gBtn">
+        <button id="dealBtn" onclick="dealCardBtn()">Deal Card</button>
+        <button id="resetGame" onclick="resetGame()">New Game</button>
+      </div>
+      <span id="msg"></span>
     </div>
+
     <!-- ------------------------------------------------------------------------------------------------- -->
+
     <footer>
       <div class="btns">
         <a href="how_to_play.html" class="howto">How To Play</a>

@@ -20,6 +20,7 @@ const save = () => {
 };
 
 const reset = () => {
-  count = 0;
-  document.getElementById("counter").innerText = count;
+  count = 0; // Reset the count to zero
+  document.getElementById("counter").innerText = count; // Reset the counter display
+  document.getElementById("savedCounts").innerHTML = ""; // Clear saved counts
 };
