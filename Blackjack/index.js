@@ -14,6 +14,8 @@ const msg = document.getElementById("msg");
 const dealCard = document.getElementById("dealBtn");
 const resetBtn = document.getElementById("resetGame");
 const alertBox = document.getElementById("customAlertBox");
+const hitBtn = document.getElementById("hitBtn");
+const standBtn = document.getElementById("standBtn");
 
 // the reset button
 const resetGame = () => {
@@ -96,23 +98,30 @@ const dealCardBtn = () => {
     deal();
     isGameStarted = true; // Set the game as started
   } else {
-    deal(); // Deal a new card if the game has already started
-  }
+    alertBox.style.display = "flex"; // Show the alert box if the game has already started
 
-  if (totalValue === 21) {
-    hasBlakJack = true; // Set the blackjack flag
-    msg.textContent = "Blackjack! You win!";
-    dealCard.disabled = true; // Disable the deal card button
-  } else if (totalValue > 21) {
-    hasBusted = true;
-    msg.textContent = "Busted! Total value exceeded 21.";
-  } else {
-    msg.textContent = `Current total value: ${totalValue}`;
-  }
+    hitBtn.addEventListener("click", () => {
+      alertBox.style.display = "none"; // Hide the alert box after hitting
+      deal();
 
-  if (hasBusted || hasBlakJack) {
-    dealCard.disabled = true; // Disable the deal card button if the game is over
-    isGameStarted = false; // Reset the game state
-    msg.textContent += "";
+      if (totalValue === 21) {
+        hasBlakJack = true; // Set the blackjack flag
+        msg.textContent = "Blackjack! You win!";
+        dealCard.disabled = true; // Disable the deal card button
+      } else if (totalValue > 21) {
+        hasBusted = true;
+        msg.textContent = "Busted! Total value exceeded 21.";
+      } else {
+        msg.textContent = `Current total value: ${totalValue}`;
+      }
+    });
+
+    // standBtn.addEventListener("click", () => {});
+
+    if (hasBusted || hasBlakJack) {
+      dealCard.disabled = true; // Disable the deal card button if the game is over
+      dealCard.style.color = "red"; // Change the color of the deal card button to red
+      resetGame(); // Reset the game state
+    }
   }
 };
