@@ -90,6 +90,31 @@ const deal = () => {
   console.log(generatedCard);
 };
 
+const checkGameStatus = () => {
+  if (totalValue === 21) {
+    hasBlakJack = true; // Set the blackjack flag
+    msg.textContent = "Blackjack! You win!";
+    dealCard.disabled = true; // Disable the deal card button
+  } else if (totalValue > 21) {
+    hasBusted = true;
+    msg.textContent = "Busted! Total value exceeded 21.";
+    dealCard.disabled = true; // Disable the deal card button
+    alertBox.style.display = "none"; // Show the alert box
+  } else {
+    msg.textContent = `Current total value: ${totalValue}`;
+  }
+};
+
+const hitBtnClick = () => {
+  if (isGameStarted) {
+    alertBox.style.display = "flex"; // Show the alert box
+    deal(); // Deal a new card
+    checkGameStatus(); // Check the game status after dealing a new card
+  }
+};
+
+const standBtnClick = () => {};
+
 // Card dealing button
 const dealCardBtn = () => {
   if (!isGameStarted) {
@@ -98,30 +123,6 @@ const dealCardBtn = () => {
     deal();
     isGameStarted = true; // Set the game as started
   } else {
-    alertBox.style.display = "flex"; // Show the alert box if the game has already started
-
-    hitBtn.addEventListener("click", () => {
-      alertBox.style.display = "none"; // Hide the alert box after hitting
-      deal();
-
-      if (totalValue === 21) {
-        hasBlakJack = true; // Set the blackjack flag
-        msg.textContent = "Blackjack! You win!";
-        dealCard.disabled = true; // Disable the deal card button
-      } else if (totalValue > 21) {
-        hasBusted = true;
-        msg.textContent = "Busted! Total value exceeded 21.";
-      } else {
-        msg.textContent = `Current total value: ${totalValue}`;
-      }
-    });
-
-    // standBtn.addEventListener("click", () => {});
-
-    if (hasBusted || hasBlakJack) {
-      dealCard.disabled = true; // Disable the deal card button if the game is over
-      dealCard.style.color = "red"; // Change the color of the deal card button to red
-      resetGame(); // Reset the game state
-    }
+    hitBtnClick(); // Deal a new card
   }
 };
