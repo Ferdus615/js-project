@@ -105,16 +105,6 @@ const checkGameStatus = () => {
   }
 };
 
-const hitBtnClick = () => {
-  if (isGameStarted) {
-    alertBox.style.display = "flex"; // Show the alert box
-    deal(); // Deal a new card
-    checkGameStatus(); // Check the game status after dealing a new card
-  }
-};
-
-const standBtnClick = () => {};
-
 // Card dealing button
 const dealCardBtn = () => {
   if (!isGameStarted) {
@@ -123,6 +113,28 @@ const dealCardBtn = () => {
     deal();
     isGameStarted = true; // Set the game as started
   } else {
-    hitBtnClick(); // Deal a new card
+    alertBox.style.display = "flex";
   }
 };
+
+//let isHitClicked = false; // Flag to track if the hit button has been clicked
+
+const hitBtnClick = () => {
+  if (isGameStarted) {
+    deal(); // Deal a new card
+    checkGameStatus(); // Check the game status after dealing a new card
+    isHitClicked = true; // Set the hit button as clicked
+  }
+
+  alertBox.style.display = "none";
+};
+
+const standBtnClick = () => {
+  dealCard.disabled = true; // Disable the deal card button
+  msg.textContent = `You chose to stand with a total value of ${totalValue}.`;
+  alertBox.style.display = "none"; // Hide the alert box
+};
+
+// Event listeners for buttons
+hitBtn.addEventListener("click", hitBtnClick);
+standBtn.addEventListener("click", standBtnClick);
