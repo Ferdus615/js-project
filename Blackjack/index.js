@@ -84,6 +84,8 @@ const deal = () => {
   totalValue += cardRealValue; // Add the value of the new card to totalValue
   console.log(totalValue);
 
+  
+
   showCard.textContent = cardSymbol; // shows the last dealt card
 
   trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
