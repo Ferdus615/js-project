@@ -49,18 +49,85 @@ const randomCardPicker = () => {
   return Math.floor(Math.random() * (suits.length * ranks.length));
 };
 
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-pickedCard.push(randomCardPicker());
-console.log(`pickedCard: ${pickedCard}`);
+const cardDrawSim = () => {
+  let chooseCard;
 
-const drawCard = deckOfCard[pickedCard];
-console.log(drawCard);
+  do {
+    chooseCard = randomCardPicker();
+  } while (
+    pickedCard.includes(chooseCard) &&
+    pickedCard.length < deckOfCard.length
+  );
+
+  if (pickedCard.length === deckOfCard.length) {
+    console.log("All the Card are drawn!");
+    return; // exit the fuction
+  }
+
+  pickedCard.push(chooseCard);
+
+  console.log(`pickedCard: ${pickedCard}`);
+
+  const drawCard = deckOfCard[pickedCard[pickedCard.length - 1]];
+  console.log(`drawCard: ${drawCard}`);
+};
+
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
+cardDrawSim();
