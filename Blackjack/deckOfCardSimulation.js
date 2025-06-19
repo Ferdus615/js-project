@@ -1,6 +1,4 @@
-const deckOfCard = [];
-
-const suits = ["♧", "♢", "♡", "♤"];
+const suits = ["♧", "♢", "♡", "♤"]; 
 const ranks = [
   "A",
   "2",
@@ -15,7 +13,7 @@ const ranks = [
   "J",
   "Q",
   "K",
-];
+]; 
 const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 
 // const createDeck = () => {
@@ -25,6 +23,8 @@ const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 //     }
 //   }
 // };
+
+const deckOfCard = []; 
 
 const createDeck = () => {
   for (let suitsIndex = 0; suitsIndex < suits.length; suitsIndex++) {
@@ -38,7 +38,7 @@ const createDeck = () => {
     }
   }
 };
-createDeck();
+createDeck(); 
 
 // console.log(deckOfCard);
 // console.log(deckOfCard.length);

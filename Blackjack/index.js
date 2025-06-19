@@ -1,8 +1,50 @@
-const randomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+// const randomNumber = (min, max) => {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// };
+// const generatedCard = [];
+
+const suits = ["♧", "♢", "♡", "♤"];
+const ranks = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K",
+];
+const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
+
+const deckOfCard = [];
+
+const createDeck = () => {
+  for (let suitsIndex = 0; suitsIndex < suits.length; suitsIndex++) {
+    for (let ranksIndex = 0; ranksIndex < ranks.length; ranksIndex++) {
+      const card = {
+        suit: suits[suitsIndex],
+        rank: ranks[ranksIndex],
+        value: values[ranksIndex],
+      };
+      deckOfCard.push(`${card.rank} of ${card.suit}`);
+    }
+  }
+};
+createDeck();
+// console.log(deckOfCard);
+// console.log(deckOfCard.length);
+
+const pickedCard = [];
+
+const randomCardPicker = () => {
+  return Math.floor(Math.random() * (suits.length * ranks.length));
 };
 
-const generatedCard = [];
 let totalValue = 0;
 let hasBlakJack = false;
 let hasBusted = false;
@@ -23,7 +65,6 @@ const resetGame = () => {
   hasBlakJack = false; // Reset the blackjack flag
   hasBusted = false; // Reset the busted flag
   isGameStarted = false; // Reset the game state
-  generatedCard.length = 0; // Clear the dealt cards
   showCard.textContent = ""; // Clear the displayed card
   trackCard.textContent = ""; // Clear the dealt cards
   msg.textContent = ""; // Clear the message
@@ -31,65 +72,29 @@ const resetGame = () => {
 };
 
 const deal = () => {
-  const newCardNum = randomNumber(1, 13); // Generate a random card value between 1 and 13
-  let cardRealValue; // Initialize cardValue with the newCardNum value
-  let cardSymbol; // Initialize cardsymbol to store the card suit
-  const cardSuit = randomNumber(1, 4); // Generate a random suit value between 1 and 4
-  let cardSuitSymbol; // Initialize cardSuitSymbol to store the card suit symbol
+  let chooseCard;
 
-  switch (cardSuit) {
-    case 1:
-      cardSuitSymbol = "♠"; // Spades
-      break;
-    case 2:
-      cardSuitSymbol = "♥"; // Hearts
-      break;
-    case 3:
-      cardSuitSymbol = "♦"; // Diamonds
-      break;
-    case 4:
-      cardSuitSymbol = "♣"; // Clubs
-      break;
-    default:
-      cardSuitSymbol = "?"; // Unknown suit
-      break;
+  do {
+    chooseCard = randomCardPicker();
+  } while (
+    pickedCard.includes(chooseCard) &&
+    pickedCard.length < deckOfCard.length
+  );
+
+  if (pickedCard.length === deckOfCard.length) {
+    console.log("All the Card are drawn!");
+    return; // exit the fuction
   }
 
-  switch (newCardNum) {
-    case 1:
-      cardRealValue = 11; // Ace is worth 11 points
-      cardSymbol = "A"; // Assign a suit symbol (e.g., Spades)
-      break;
-    case 11:
-      cardRealValue = 10; // Jack is worth 10 points
-      cardSymbol = "J"; // Assign a suit symbol (e.g., Hearts)
-      break;
-    case 12:
-      cardRealValue = 10; // Queen is worth 10 points
-      cardSymbol = "Q"; // Assign a suit symbol (e.g., Hearts)
-      break;
-    case 13:
-      cardRealValue = 10; // King is worth 10 points
-      cardSymbol = "K"; // Assign a suit symbol (e.g., Hearts)
-      break;
-    default:
-      cardRealValue = newCardNum; // King is worth 10 points
-      cardSymbol = String(newCardNum); // Assign a suit symbol (e.g., Hearts)
-      break;
-  }
+  pickedCard.push(chooseCard);
 
-  cardSymbol = `${cardSymbol}${cardSuitSymbol}`; // Combine the card symbol with its suit symbol
-  generatedCard.push(cardSymbol); // Add the card symbol to the generatedCard array
+  console.log(`pickedCard: ${pickedCard}`);
 
-  totalValue += cardRealValue; // Add the value of the new card to totalValue
-  console.log(totalValue);
+  const drawCard = deckOfCard[pickedCard[pickedCard.length - 1]];
+  showCard.textContent = drawCard;
+  console.log(`drawCard: ${drawCard}`);
 
-  
-
-  showCard.textContent = cardSymbol; // shows the last dealt card
-
-  trackCard.textContent = generatedCard.join(", "); // shows the dealt cards
-  console.log(generatedCard);
+  trackCard.textContent += `${drawCard}, `; // Track the dealt cards
 };
 
 const checkGameStatus = () => {
