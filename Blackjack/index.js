@@ -21,8 +21,9 @@ const ranks = [
 ];
 const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 
+// Create a deck of cards
+// Each card is represented as an object with suit, rank, and value properties
 const deckOfCard = [];
-
 const createDeck = () => {
   for (let suitsIndex = 0; suitsIndex < suits.length; suitsIndex++) {
     for (let ranksIndex = 0; ranksIndex < ranks.length; ranksIndex++) {
@@ -31,18 +32,19 @@ const createDeck = () => {
         rank: ranks[ranksIndex],
         value: values[ranksIndex],
       };
-      deckOfCard.push(`${card.rank} of ${card.suit}`);
+      deckOfCard.push(card); // Push the card object directly into the deck
     }
   }
 };
-createDeck();
+createDeck(); // Populates the deck of cards
 // console.log(deckOfCard);
 // console.log(deckOfCard.length);
 
-const pickedCard = [];
+const pickedCard = []; // Array to keep track of picked cards
 
+// Function to pick a random card from the deck
 const randomCardPicker = () => {
-  return Math.floor(Math.random() * (suits.length * ranks.length));
+  return Math.floor(Math.random() * (suits.length * ranks.length)); // It generates a random index based on the total number of cards in the deck
 };
 
 let totalValue = 0;
@@ -71,9 +73,11 @@ const resetGame = () => {
   dealCard.disabled = false; // Enable the deal card button
 };
 
+// Function to deal a card & It picks a random card from the deck and updates the game state
 const deal = () => {
   let chooseCard;
 
+  // loops until unique card is picked or all the cards are picked
   do {
     chooseCard = randomCardPicker();
   } while (
@@ -86,15 +90,23 @@ const deal = () => {
     return; // exit the fuction
   }
 
-  pickedCard.push(chooseCard);
+  console.log(`Chooseed Card: ${chooseCard}`);
 
+  pickedCard.push(chooseCard); // Add the picked card to the array
   console.log(`pickedCard: ${pickedCard}`);
 
-  const drawCard = deckOfCard[pickedCard[pickedCard.length - 1]];
-  showCard.textContent = drawCard;
-  console.log(`drawCard: ${drawCard}`);
+  const drawCard = deckOfCard[chooseCard]; // Get the drawn card using the last picked index
+  const drawnCardFace = `${drawCard.rank} of ${drawCard.suit}`; // Display the drawn card
+  console.log(`drawCard: ${drawnCardFace}`);
 
-  trackCard.textContent += `${drawCard}, `; // Track the dealt cards
+  showCard.textContent = drawnCardFace;
+  console.log(`Shown Card: ${showCard.textContent}`);
+
+  trackCard.textContent += `${drawnCardFace}, `; // Track the dealt cards
+  console.log(`Cards Drawn: ${trackCard.textContent}`);
+
+  totalValue += drawCard.value;
+  console.log(`Total Value: ${totalValue}`);
 };
 
 const checkGameStatus = () => {
@@ -118,6 +130,7 @@ const dealCardBtn = () => {
     resetGame(); // Reset the game state if it hasn't started
     deal();
     deal();
+    checkGameStatus();
     isGameStarted = true; // Set the game as started
   } else {
     alertBox.style.display = "flex";

@@ -1,4 +1,4 @@
-const suits = ["♧", "♢", "♡", "♤"]; 
+const suits = ["♧", "♢", "♡", "♤"];
 const ranks = [
   "A",
   "2",
@@ -13,7 +13,7 @@ const ranks = [
   "J",
   "Q",
   "K",
-]; 
+];
 const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 
 // const createDeck = () => {
@@ -24,7 +24,7 @@ const values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 //   }
 // };
 
-const deckOfCard = []; 
+const deckOfCard = [];
 
 const createDeck = () => {
   for (let suitsIndex = 0; suitsIndex < suits.length; suitsIndex++) {
@@ -34,11 +34,11 @@ const createDeck = () => {
         rank: ranks[ranksIndex],
         value: values[ranksIndex],
       };
-      deckOfCard.push(`${card.rank} of ${card.suit}`);
+      deckOfCard.push(card); // Push the card object directly into the deck
     }
   }
 };
-createDeck(); 
+createDeck();
 
 // console.log(deckOfCard);
 // console.log(deckOfCard.length);
@@ -63,69 +63,19 @@ const cardDrawSim = () => {
     console.log("All the Card are drawn!");
     return; // exit the fuction
   }
+  console.log(`Chooseed Card: ${chooseCard}`);
 
   pickedCard.push(chooseCard);
-
   console.log(`pickedCard: ${pickedCard}`);
 
-  const drawCard = deckOfCard[pickedCard[pickedCard.length - 1]];
-  console.log(`drawCard: ${drawCard}`);
+  const drawCard = deckOfCard[chooseCard];
+  console.log(`drawCard: ${drawCard.rank} of ${drawCard.suit} `);
+
+  const cardValue = drawCard.value;
+  console.log(`cardValue: ${cardValue}`);
+
 };
 
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
-cardDrawSim();
 cardDrawSim();
 cardDrawSim();
 cardDrawSim();
