@@ -12,14 +12,14 @@ input.addEventListener("input", () => {
   RemainingChar.textContent = maxChar - charLen;
 
   if (charLen >= 420) {
-    total.style.color = "red";
+    total.style.color = "#ff637e";
   } else {
-    total.style.color = "#e5e5e5";
+    total.style.color = "#00bcff";
   }
 
   if (maxChar - charLen <= 80) {
-    left.style.color = "red";
+    left.style.color = "#ff637e";
   } else {
-    left.style.color = "#e5e5e5";
+    left.style.color = "#00bcff";
   }
 });
