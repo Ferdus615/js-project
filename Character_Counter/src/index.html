@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./output.css" rel="stylesheet" />
   </head>
-  <body class="bg-zinc-950 text-[#e5e5e5]">
-    <div class="p-5 flex flex-col justify-center items-center">
-      <h2 class="text-xl font-bold">Character Counter</h2>
+  <body
+    class="flex justify-center items-center w-full h-screen bg-zinc-950 text-[#e5e5e5]"
+  >
+    <div class="p-5 flex flex-col justify-center">
+      <h2 class="text-xl font-bold p-3 border-2 rounded-md mb-5">
+        Character Counter
+      </h2>
       <textarea
         name="textInput"
         id="textInput"
         maxlength="500"
         rows="5"
         cols="50"
-        class="border-2 bg-zinc-500 p-2"
+        class="border-2 rounded-md bg-zinc-500 p-2 mb-5"
       ></textarea>
-      <p id="total">Total: <span id="countUp">0</span> / 500 Character</p>
-      <p id="left">Left: <span id="countDown">500</span> / 500 Character</p>
+      <div
+        class="flex justify-between text-sm font-light p-3 border-2 rounded-md mb-5"
+      >
+        <p id="total">Total: <span id="countUp">0</span> / 500 Character</p>
+        <p id="left">Left: <span id="countDown">500</span> / 500 Character</p>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
