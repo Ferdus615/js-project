@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0a1017;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rest of your CSS */
+h1 {
+  color: azure;
+  text-align: center;
+  font-size: 50px;
+  font-weight: lighter;
+  margin-bottom: 50px;
+}
+
+.cell_box {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.cell {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid azure;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: lightgreen;
+  font-size: 25px;
+}
+
+/* btns */
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.reset {
+  text-decoration: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background-color: brown;
+  color: honeydew;
+  font-size: 20px;
+  transition: padding 0.25s ease-in-out;
+}
+.reset:hover {
+  padding: 15px 30px;
+}
+.reset:active {
+  padding: 10px 25px;
+}
