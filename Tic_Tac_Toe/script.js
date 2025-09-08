@@ -1,12 +1,13 @@
 const Box_container = document.getElementById("boxs");
 const Boxes = Box_container.querySelectorAll("div");
 const ResetBtn = document.getElementById("reset");
+const UpdateText = document.getElementById("update");
 
 const gameStates = ["", "", "", "", "", "", "", "", ""];
 let isGameActive = false;
 let currentPlayer = "X";
 
-Boxes.forEach((box) => {
+Boxes.forEach((box, index) => {
   box.addEventListener("click", (e) => {
     if (
       isGameActive &&
@@ -17,10 +18,15 @@ Boxes.forEach((box) => {
 
       if (currentPlayer === "O") {
         e.target.textContent = "X";
+        gameStates[index] = "X";
+        UpdateText.textContent = "Now O's turn";
       } else {
         e.target.textContent = "O";
+        gameStates[index] = "O";
+        UpdateText.textContent = "Now X's turn";
       }
 
+      console.log(gameStates);
       console.log(e.target.id + " " + isGameActive);
     }
   });

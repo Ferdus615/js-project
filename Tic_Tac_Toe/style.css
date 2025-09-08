@@ -43,13 +43,23 @@ h1 {
   font-size: 25px;
 }
 
+/* update text */
+#update {
+  color: beige;
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+}
+
 /* btns */
 .btns {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 50px;
-  height: 100px;
+  height: 80px;
   overflow: hidden;
 }
 
