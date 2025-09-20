@@ -36,15 +36,17 @@ h1 {
   height: 100px;
   justify-content: center;
   align-items: center;
-  border: 3px solid azure;
+  border: 1px solid hsla(192, 83%, 47%, 0.3);
   border-radius: 10px;
   cursor: pointer;
-  background-color: lightgreen;
-  font-size: 25px;
+  background-color: black;
+  font-size: 50px;
+  color: aliceblue;
 }
 
 /* update text */
 #update {
+  margin-top: 50px;
   color: beige;
   font-style: italic;
   display: flex;
@@ -68,7 +70,7 @@ h1 {
   outline: none;
   border-radius: 10px;
   padding: 10px 25px;
-  background-color: brown;
+  background-color: crimson;
   color: honeydew;
   font-size: 20px;
   transition: padding 0.25s ease-in-out;

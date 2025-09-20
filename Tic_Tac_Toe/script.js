@@ -35,13 +35,13 @@ Boxes.forEach((box, index) => {
       if (Winner) {
         UpdateText.textContent = `Congratulations, ${Winner} has won!`;
         isGameActive = false;
-        return;
+        return
       }
 
       if (!gameBoard.includes("")) {
         UpdateText.textContent = "Whoops!, It's a draw!";
         isGameActive = false;
-        return;
+        return
       }
 
       currentPlayer = currentPlayer === "X" ? "O" : "X";
@@ -53,7 +53,7 @@ Boxes.forEach((box, index) => {
   });
 });
 
-const checkWinner = (gameBoard) => {
+const checkWinner = () => {
   for (let cond of winConditions) {
     const [a, b, c] = cond;
     if (
@@ -61,6 +61,7 @@ const checkWinner = (gameBoard) => {
       gameBoard[a] === gameBoard[b] &&
       gameBoard[a] === gameBoard[c]
     ) {
+      console.log(`Winning condition: ${cond}`);
       return gameBoard[a];
     }
   }
