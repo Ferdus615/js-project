@@ -21,26 +21,33 @@ const winConditions = [
   [2, 4, 6],
 ];
 
+// Gives you the initial instruction to start the game.
 UpdateText.textContent = `To start playing click New Game button!`;
 
+// mainfunction that runs the code (event delegation)
 Boxes.forEach((box, index) => {
+  // event listner to update the board on click (event delegation)
   box.addEventListener("click", (e) => {
     console.log("Clicked:" + " " + e.target.id);
 
+    // logic for updating the board.
     if (isGameActive && e.target.textContent === "") {
+      // update the main array
       gameBoard[index] = currentPlayer;
       console.log(gameBoard);
 
+      // on click place the correct player
       e.target.textContent = currentPlayer;
-
       currentPlayer = currentPlayer === "✖" ? "𐤏" : "✖";
 
+      // check for winner
       const winner = checkWinner(gameBoard);
       winner
         ? ((UpdateText.textContent = `'${winner.winner}'  has won the game. Congratulations!`),
           (isGameActive = false))
         : (UpdateText.textContent = `Now ${currentPlayer}'s turn!`);
 
+      // check for draw
       if (!gameBoard.includes("")) {
         UpdateText.textContent = "Whoops!, it's a draw!";
         e.target.style.backgroundColor = "hotpink";
@@ -48,6 +55,7 @@ Boxes.forEach((box, index) => {
       }
     }
 
+    // highligh the winning segments
     const highlightWinner = checkWinner(gameBoard);
     if (highlightWinner) {
       highlightWinner.winningArray.forEach((index) => {
@@ -71,6 +79,7 @@ Boxes.forEach((box, index) => {
   });
 });
 
+// fucntion to check for the winner
 const checkWinner = () => {
   for (condition of winConditions) {
     const [a, b, c] = condition;
@@ -86,6 +95,7 @@ const checkWinner = () => {
   return null;
 };
 
+// reset btn
 ResetBtn.addEventListener("click", () => {
   reset();
   currentPlayer = "✖";
