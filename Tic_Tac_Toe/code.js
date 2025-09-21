@@ -21,7 +21,7 @@ const winConditions = [
   [2, 4, 6],
 ];
 
-UpdateText.textContent = `Please click the New Game button to start playing!`;
+UpdateText.textContent = `To start playing click New Game button!`;
 
 Boxes.forEach((box, index) => {
   box.addEventListener("click", (e) => {
@@ -47,9 +47,17 @@ Boxes.forEach((box, index) => {
       highlightWinner.winningArray.forEach((index) => {
         const winningBox = Boxes[index];
 
-        winningBox.style.backgroundColor = "crimson";
+        winningBox.style.backgroundColor = "aqua";
       });
     }
+  });
+
+  box.addEventListener("mouseover", (e) => {
+    e.target.style.backgroundColor = "yellow";
+  });
+
+  box.addEventListener("mouseout", (e) => {
+    e.target.style.backgroundColor = "hotpink";
   });
 });
 
@@ -83,6 +91,6 @@ const reset = () => {
 
   Boxes.forEach((box) => {
     box.textContent = "";
-    box.style.backgroundColor = "black";
+    box.style.backgroundColor = "hotpink";
   });
 };
