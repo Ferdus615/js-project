@@ -40,6 +40,12 @@ Boxes.forEach((box, index) => {
         ? ((UpdateText.textContent = `'${winner.winner}'  has won the game. Congratulations!`),
           (isGameActive = false))
         : (UpdateText.textContent = `Now ${currentPlayer}'s turn!`);
+
+      if (!gameBoard.includes("")) {
+        UpdateText.textContent = "Whoops!, it's a draw!";
+        e.target.style.backgroundColor = "hotpink";
+        isGameActive = false;
+      }
     }
 
     const highlightWinner = checkWinner(gameBoard);
@@ -52,12 +58,16 @@ Boxes.forEach((box, index) => {
     }
   });
 
-  box.addEventListener("mouseover", (e) => {
-    e.target.style.backgroundColor = "yellow";
+  const mouseover = box.addEventListener("mouseover", (e) => {
+    if (isGameActive) {
+      e.target.style.backgroundColor = "orange";
+    }
   });
 
-  box.addEventListener("mouseout", (e) => {
-    e.target.style.backgroundColor = "hotpink";
+  const mouseout = box.addEventListener("mouseout", (e) => {
+    if (isGameActive) {
+      e.target.style.backgroundColor = "hotpink";
+    }
   });
 });
 
