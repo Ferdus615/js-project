@@ -1,7 +1,3 @@
-Here's the documentation for the provided HTML and JavaScript code.
-
----
-
 # Character Counter Application Documentation 📝
 
 This document provides an overview of the HTML and JavaScript code for a real-time character counter. It explains the purpose of the HTML elements and the JavaScript logic that calculates and displays the number of characters entered by a user in a `textarea` field.
