@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Password Generator</h1>
+
+      <form onsubmit="event.preventDefault(); generate();">
+        <div class="passValue">
+          <label class="passValueText"> Enter The Password Length </label>
+          <input type="number" id="passwordLength" min="1" value="1" />
+        </div>
+
+        <div class="selectBox">
+          <div class="selectBox-1">
+            <div class="label">
+              <label for="">
+                Include Lowercase characters:
+                <input type="checkbox" name="" id="addLowerChar" />
+              </label>
+            </div>
+
+            <div class="label">
+              <label for="">
+                Include Uppercase characters:
+                <input type="checkbox" name="" id="addUpperChar" />
+              </label>
+            </div>
+          </div>
+
+          <div class="selectBox-2">
+            <div class="label">
+              <label for="">
+                Include Number characters:
+                <input type="checkbox" name="" id="addNumber" />
+              </label>
+            </div>
+
+            <div class="label">
+              <label for="">
+                Include Special characters:
+                <input type="checkbox" name="" id="addSymbol" />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Generate Password</button>
+      </form>
+
+      <p id="showPassword"></p>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

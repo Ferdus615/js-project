@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="flex justify-center items-center w-full h-screen bg-zinc-950 text-[#e5e5e5]"
+  >
+    <div class="p-5 flex flex-col justify-center">
+      <h2 class="text-xl font-bold p-3 border-2 rounded-md mb-5 text-sky-400">
+        Character Counter
+      </h2>
+      <textarea
+        name="textInput"
+        id="textInput"
+        maxlength="1500"
+        rows="10"
+        cols="100"
+        class="border-2 rounded-md bg-[#10172a] border-sky-400 p-2 mb-5"
+      ></textarea>
+      <div
+        class="flex justify-between text-sm font-light p-3 border-2 rounded-md mb-5 border-sky-400 text-sky-400"
+      >
+        <p id="total">
+          Total: <span id="countUp"></span> /
+          <span id="upLimit"></span> Character
+        </p>
+        <p id="left">
+          Left: <span id="countDown"></span> /
+          <span id="downLimit"></span> Character
+        </p>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

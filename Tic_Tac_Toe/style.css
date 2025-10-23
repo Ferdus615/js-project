@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0a1017;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 60px;
+  border-radius: 15px;
+  background-color: turquoise;
+  border: 1px solid rgba(255, 105, 180, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0.4);
+}
+
+/* Rest of your CSS */
+h1 {
+  color: azure;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.cell_box {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+  padding: 10px;
+}
+
+.cell {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  background-color: hotpink;
+  /* border: 1px solid hsla(192, 83%, 47%, 0.3); */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 50px;
+  color: aliceblue;
+}
+.cell:hover {
+  background-color: orange;
+}
+
+/* update text */
+#update {
+  margin-top: 35px;
+  color: aliceblue;
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+}
+
+/* btns */
+.reset {
+  display: block;
+  text-decoration: none;
+  outline: none;
+  border-radius: 50px;
+  /* background-color: crimson; */
+  background-color: hotpink;
+  color: honeydew;
+  font-size: 20px;
+  width: 95%;
+  padding: 10px;
+  margin-top: 40px;
+  text-align: center;
+  transition: color 0.25s ease-in-out;
+}
+.reset:hover {
+  color: yellow;
+}
