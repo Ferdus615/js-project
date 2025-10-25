@@ -1,9 +1,10 @@
 // the canvas(paper) and the context(pen)
 const canvas = document.getElementById("gameBoard");
 const ctx = canvas.getContext("2d");
+const score = document.getElementById("score");
 
 let direction = "RIGHT";
-let speed = 1000;
+let speed = 100;
 
 // each section of the gameBoard
 const tileSize = 20;
@@ -16,12 +17,20 @@ const snake = [
   { x: 13 * tileSize, y: 15 * tileSize },
 ];
 
-const drawApple = () => {
-  const pX = Math.floor(Math.random() * 30);
-  const pY = Math.floor(Math.random() * 30);
+const applePosition = () => {
+  posX = Math.floor((Math.random() * canvas.width) / tileSize);
+  posY = Math.floor((Math.random() * canvas.height) / tileSize);
+  return {
+    x: posX * tileSize,
+    y: posY * tileSize,
+  };
+};
 
+let apple = applePosition();
+
+const drawApple = () => {
   ctx.fillStyle = "red";
-  ctx.fillRect(pX * tileSize, pY * tileSize, segmentSize, segmentSize);
+  ctx.fillRect(apple.x, apple.y, segmentSize, segmentSize);
 };
 
 const moveSnake = () => {
@@ -57,6 +66,9 @@ const moveSnake = () => {
   }
 
   snake.unshift(head);
+  if (head.x === apple.x && head.y === apple.y) {
+    apple = applePosition();
+  }
   snake.pop();
 };
 
@@ -86,8 +98,8 @@ const drawSnake = () => {
 
 const drawGame = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawApple();
   moveSnake();
-  // drawApple();
   drawSnake();
 };
 
