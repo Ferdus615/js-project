@@ -58,6 +58,19 @@ const moveSnake = () => {
   snake.pop();
 };
 
+const changeDirection = (e) => {
+  const key = e.key.toLowerCase();
+
+  if ((key === "arrowleft" || key === "a") && direction !== "RIGHT")
+    direction = "LEFT";
+  else if ((key === "arrowright" || key === "d") && direction !== "LEFT")
+    direction = "RIGHT";
+  else if ((key === "arrowup" || key === "w") && direction !== "DOWN")
+    direction = "UP";
+  else if ((key === "arrowdown" || key === "s") && direction !== "UP")
+    direction = "DOWN";
+};
+
 const drawSnake = () => {
   snake.forEach((segment, index) => {
     if (index === 0) {
@@ -76,4 +89,6 @@ const drawGame = () => {
   drawSnake();
 };
 
+// browser listening to keypress
+document.addEventListener("keydown", changeDirection);
 setInterval(drawGame, speed);
