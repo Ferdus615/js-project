@@ -34,5 +34,15 @@ Object.keys(roleAct).map((role) => {
   });
 });
 
-
 // ====================================================================================
+
+const displayFunction = (value) => {
+  console.log(value);
+};
+
+const myCalculator = (value1, value2, display) => {
+  let result = value1 + value2;
+  display(result);
+};
+
+myCalculator(5, 5, displayFunction);
