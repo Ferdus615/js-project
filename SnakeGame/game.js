@@ -2,9 +2,11 @@
 const canvas = document.getElementById("gameBoard");
 const ctx = canvas.getContext("2d");
 const score = document.getElementById("score");
+const reset = document.getElementById("resetBtn");
 
 let direction = "RIGHT";
 let speed = 100;
+let scoreCount = 0;
 
 // each section of the gameBoard
 const tileSize = 20;
@@ -31,6 +33,11 @@ let apple = applePosition();
 const drawApple = () => {
   ctx.fillStyle = "red";
   ctx.fillRect(apple.x, apple.y, segmentSize, segmentSize);
+};
+
+const updateScore = () => {
+  scoreCount++;
+  score.textContent = scoreCount;
 };
 
 const moveSnake = () => {
@@ -68,6 +75,7 @@ const moveSnake = () => {
   snake.unshift(head);
   if (head.x === apple.x && head.y === apple.y) {
     apple = applePosition();
+    updateScore();
   }
   snake.pop();
 };
