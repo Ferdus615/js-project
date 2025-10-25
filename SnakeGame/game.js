@@ -11,9 +11,9 @@ const gap = 1;
 const segmentSize = tileSize - gap * 2;
 
 const snake = [
+  { x: 15 * tileSize, y: 15 * tileSize },
   { x: 14 * tileSize, y: 15 * tileSize },
   { x: 13 * tileSize, y: 15 * tileSize },
-  { x: 12 * tileSize, y: 15 * tileSize },
 ];
 
 const drawApple = () => {
@@ -33,9 +33,25 @@ const moveSnake = () => {
       if (head.x > canvas.width) {
         head.x = 0 * tileSize;
       }
+      break;
     case "LEFT":
+      head.x -= tileSize;
+      if (head.x < 0) {
+        head.x = 30 * tileSize;
+      }
+      break;
     case "UP":
+      head.y -= tileSize;
+      if (head.y < 0) {
+        head.y = 30 * tileSize;
+      }
+      break;
     case "DOWN":
+      head.y += tileSize;
+      if (head.y > canvas.height) {
+        head.y = 0 * tileSize;
+      }
+      break;
   }
 
   snake.unshift(head);
