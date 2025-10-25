@@ -3,7 +3,7 @@ const canvas = document.getElementById("gameBoard");
 const ctx = canvas.getContext("2d");
 
 let direction = "RIGHT";
-let speed = 100;
+let speed = 1000;
 
 // each section of the gameBoard
 const tileSize = 20;
@@ -27,31 +27,33 @@ const drawApple = () => {
 const moveSnake = () => {
   const head = { ...snake[0] };
 
-  switch (direction) {
-    case "RIGHT":
-      head.x += tileSize;
-      if (head.x > canvas.width) {
-        head.x = 0 * tileSize;
-      }
-      break;
-    case "LEFT":
-      head.x -= tileSize;
-      if (head.x < 0) {
-        head.x = 30 * tileSize;
-      }
-      break;
-    case "UP":
-      head.y -= tileSize;
-      if (head.y < 0) {
-        head.y = 30 * tileSize;
-      }
-      break;
-    case "DOWN":
-      head.y += tileSize;
-      if (head.y > canvas.height) {
-        head.y = 0 * tileSize;
-      }
-      break;
+  if (head.x <= canvas.width || head.y <= canvas.height) {
+    switch (direction) {
+      case "RIGHT":
+        head.x += tileSize;
+        if (head.x >= canvas.width) {
+          head.x = 0;
+        }
+        break;
+      case "LEFT":
+        head.x -= tileSize;
+        if (head.x <= 0) {
+          head.x = canvas.width - tileSize;
+        }
+        break;
+      case "UP":
+        head.y -= tileSize;
+        if (head.y <= 0) {
+          head.y = canvas.height - tileSize;
+        }
+        break;
+      case "DOWN":
+        head.y += tileSize;
+        if (head.y >= canvas.height) {
+          head.y = 0;
+        }
+        break;
+    }
   }
 
   snake.unshift(head);
