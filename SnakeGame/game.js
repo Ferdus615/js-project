@@ -37,13 +37,13 @@ const moveSnake = () => {
         break;
       case "LEFT":
         head.x -= tileSize;
-        if (head.x <= 0) {
+        if (head.x < 0) {
           head.x = canvas.width - tileSize;
         }
         break;
       case "UP":
         head.y -= tileSize;
-        if (head.y <= 0) {
+        if (head.y < 0) {
           head.y = canvas.height - tileSize;
         }
         break;
