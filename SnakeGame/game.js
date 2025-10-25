@@ -27,11 +27,15 @@ const drawApple = () => {
 const moveSnake = () => {
   const head = { ...snake[0] };
 
-  if (direction === "RIGHT") {
-    head.x += tileSize;
-    if (head.x > canvas.width) {
-      head.x = 0 * tileSize;
-    }
+  switch (direction) {
+    case "RIGHT":
+      head.x += tileSize;
+      if (head.x > canvas.width) {
+        head.x = 0 * tileSize;
+      }
+    case "LEFT":
+    case "UP":
+    case "DOWN":
   }
 
   snake.unshift(head);
