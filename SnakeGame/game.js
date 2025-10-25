@@ -3,7 +3,7 @@ const canvas = document.getElementById("gameBoard");
 const ctx = canvas.getContext("2d");
 
 let direction = "RIGHT";
-let speed = 500;
+let speed = 100;
 
 // each section of the gameBoard
 const tileSize = 20;
@@ -29,6 +29,9 @@ const moveSnake = () => {
 
   if (direction === "RIGHT") {
     head.x += tileSize;
+    if (head.x > canvas.width) {
+      head.x = 0 * tileSize;
+    }
   }
 
   snake.unshift(head);
@@ -49,7 +52,7 @@ const drawSnake = () => {
 const drawGame = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   moveSnake();
-  drawApple();
+  // drawApple();
   drawSnake();
 };
 
