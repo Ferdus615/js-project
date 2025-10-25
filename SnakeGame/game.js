@@ -12,8 +12,12 @@ const snake = [
 ];
 
 const drawSnake = () => {
-  ctx.fillStyle = "skyblue";
   snake.forEach((segment, index) => {
+    if (index === 0) {
+      ctx.fillStyle = "skyblue";
+    } else {
+      ctx.fillStyle = "blue";
+    }
     ctx.fillRect(segment.x, segment.y, segmentSize, segmentSize);
   });
 };
