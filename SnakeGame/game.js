@@ -12,7 +12,7 @@ const down = document.getElementById("down");
 const right = document.getElementById("right");
 
 const wall = document.getElementById("wall");
-const speedy = document.getElementById("speed");
+const speedy = document.getElementById("speedy");
 const hard = document.getElementById("hard");
 const infite = document.getElementById("infite");
 
@@ -77,6 +77,23 @@ const drawSnake = () => {
 const updateScore = () => {
   scoreCount++;
   score.textContent = `Score: ${scoreCount}`;
+
+  if (isSpeedy) {
+    let topSpeed = 50;
+
+    let newSpeed = speed - 10;
+
+    if (newSpeed >= topSpeed) {
+      speed = newSpeed;
+
+      clearInterval(gameLoop);
+      gameLoop = setInterval(drawGame, speed);
+
+      console.log(`New speed interval: ${speed}`);
+    } else {
+      console.log(`Speed limit reached at ${speed}ms.`);
+    }
+  }
 };
 
 const moveSnake = () => {
@@ -250,6 +267,7 @@ const finishGameSetup = () => {
 
   clearInterval(gameLoop);
   startBtn.textContent = "Start Game";
+  pauseBtn.textContent = "Pause Game";
 
   resetGame();
   drawStartScreen();
@@ -346,12 +364,15 @@ const gameOver = () => {
 
   isPaused = false;
   isGameStarted = true;
-  console.log("Game Over!");
 
   isWall = false;
   isSpeedy = false;
   isHard = false;
   isInfite = false;
+
+  speed = 100;
+
+  console.log("Game Over!");
 };
 
 const drawStartScreen = () => {
@@ -394,8 +415,21 @@ wall.addEventListener("click", () => {
 
   console.log(`isWall: ${isWall}`);
 });
-// speedy.addEventListener("click", () => {});
-// hard.addEventListener("click", () => {});
+
+hard.addEventListener("click", () => {
+  if (!isGameStarted) {
+    isHard = true;
+
+    isWall = true;
+    speed = 50;
+  }
+
+  isSpeedy = false;
+  isInfite = false;
+
+  console.log(`isHard: ${isHard}, speed: ${speed}`);
+});
+
 infite.addEventListener("click", () => {
   if (!isGameStarted) {
     isInfite = true;
@@ -405,6 +439,19 @@ infite.addEventListener("click", () => {
   isHard = false;
 
   console.log(`isInfite: ${isInfite}`);
+});
+
+speedy.addEventListener("click", () => {
+  if (!isGameStarted) {
+    isSpeedy = true;
+    speed = 120;
+  }
+
+  isInfite = false;
+  isWall = false;
+  isHard = false;
+
+  console.log(`isSpeedy: ${isSpeedy}, initial speed: ${speed}`);
 });
 
 // browser listening to keypress
