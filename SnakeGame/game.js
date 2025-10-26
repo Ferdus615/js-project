@@ -2,6 +2,8 @@
 const canvas = document.getElementById("gameBoard");
 const ctx = canvas.getContext("2d");
 const score = document.getElementById("score");
+const startBtn = document.getElementById("startBtn");
+const pauseBtn = document.getElementById("pauseBtn");
 const resetBtn = document.getElementById("resetBtn");
 
 let direction = "RIGHT";
@@ -125,6 +127,7 @@ const drawGame = () => {
 
   if (collisionDetection()) {
     clearInterval(gameLoop);
+    gameOver();
   }
 };
 
@@ -145,10 +148,37 @@ const resetSnake = () => {
   gameLoop = setInterval(drawGame, speed);
 };
 
+const pauseGame = () => {
+  clearInterval
+}
+
+const gameStart = () => {
+  clearInterval(gameLoop);
+  gameLoop = setInterval(drawGame, speed);
+};
+
+startBtn.addEventListener("click", () => {
+  gameStart();
+});
+
 resetBtn.addEventListener("click", () => {
   resetSnake();
 });
 
+function gameOver() {
+  clearInterval(gameLoop); // stop the loop
+
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "white";
+  ctx.font = "40px Bitcount Grid Single, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+
+  // Optional: console log or alert
+  console.log("Game Over!");
+}
+
 // browser listening to keypress
 document.addEventListener("keydown", changeDirection);
-gameLoop = setInterval(drawGame, speed);

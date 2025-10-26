@@ -21,6 +21,18 @@ body {
   font-size: 35px;
 }
 
+.startBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.pauseBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+}
+
 .resetBtn {
   width: 100px;
   height: 40px;
