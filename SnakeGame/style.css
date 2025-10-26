@@ -3,8 +3,6 @@
   margin: 0;
 }
 body {
-  min-width: 100vw;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,11 +17,12 @@ body {
 }
 
 .container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding: 50px;
+  padding: 20px;
 }
 
 .title {
@@ -47,6 +46,8 @@ body {
   justify-content: space-between;
 }
 
+.resetBtn,
+.pauseBtn,
 .startBtn {
   padding: 5px 10px;
   border-radius: 5px;
@@ -54,24 +55,8 @@ body {
   font-size: 25px;
   background-color: #f5e612;
   color: #341b5f;
-}
-
-.pauseBtn {
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-family: "Tiny5", sans-serif;
-  font-size: 25px;
-  background-color: #f5e612;
-  color: #341b5f;
-}
-
-.resetBtn {
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-family: "Tiny5", sans-serif;
-  font-size: 25px;
-  background-color: #f5e612;
-  color: #341b5f;
+  border: none;
+  cursor: pointer;
 }
 
 .direction-btn {

@@ -66,7 +66,7 @@ const drawSnake = () => {
 
 const updateScore = () => {
   scoreCount++;
-  score.textContent = scoreCount;
+  score.textContent = `Score: ${scoreCount}`;
 };
 
 const moveSnake = () => {
@@ -123,6 +123,7 @@ const changeDirection = (e) => {
     direction = "DOWN";
 
   if (e.code === "Space") {
+    e.preventDefault();
     pauseGame();
   }
 
@@ -230,15 +231,15 @@ const pauseGame = () => {
 };
 
 const pauseScreen = () => {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+  ctx.fillStyle = "rgba(236, 19, 164, 1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "white";
-  ctx.font = "40px Bitcount Grid Single, sans-serif";
+  ctx.font = "40px Tiny5";
   ctx.textAlign = "center";
   ctx.fillText("PAUSED", canvas.width / 2, canvas.height / 2);
 
   ctx.fillStyle = "white";
-  ctx.font = "20px Bitcount Grid Single, sans-serif";
+  ctx.font = "20px Tiny5, sans-serif";
   ctx.textAlign = "center";
   ctx.fillText(
     "Press 'Space' to Pause/Resume",
@@ -254,16 +255,16 @@ pauseBtn.addEventListener("click", () => {
 function gameOver() {
   clearInterval(gameLoop);
 
-  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+  ctx.fillStyle = "rgba(236, 19, 164, 1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "white";
-  ctx.font = "40px Bitcount Grid Single, sans-serif";
+  ctx.font = "40px Tiny5, sans-serif";
   ctx.textAlign = "center";
   ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
 
   ctx.fillStyle = "white";
-  ctx.font = "20px Bitcount Grid Single, sans-serif";
+  ctx.font = "20px Tiny5, sans-serif";
   ctx.textAlign = "center";
   ctx.fillText(
     "Please restart the game!",
@@ -277,18 +278,20 @@ function gameOver() {
 const drawStartScreen = () => {
   if (!isGameStarted) {
     ctx.fillStyle = "white";
-    ctx.font = "20px Bitcount Grid Single, sans-serif";
+    ctx.font = "20px Tiny5, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(
       "Press ENTER to Begin",
       canvas.width / 2,
       canvas.height / 2 - 40
     );
+    ctx.font = "30px Tiny5, sans-serif";
     ctx.fillText(
       "Use 'W,A,S,D' or 'Arrow key' to move",
       canvas.width / 2,
       canvas.height / 2
     );
+    ctx.font = "20px Tiny5, sans-serif";
     ctx.fillText(
       "Use 'Space' to Pause/Resume",
       canvas.width / 2,
