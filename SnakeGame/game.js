@@ -177,7 +177,7 @@ const changeDirection = (e) => {
     pauseGame();
   }
 
-  if (key === "enter") {
+  if (key === "shift") {
     gameStart();
   }
 };
@@ -251,7 +251,10 @@ const finishGameSetup = () => {
   clearInterval(gameLoop);
   startBtn.textContent = "Start Game";
 
+  resetGame();
   drawStartScreen();
+
+  isInfite = false;
 
   console.log(`isGameStarted: ${isGameStarted}`);
 };
@@ -342,8 +345,13 @@ const gameOver = () => {
   );
 
   isPaused = false;
-  isGameStarted = false;
+  isGameStarted = true;
   console.log("Game Over!");
+
+  isWall = false;
+  isSpeedy = false;
+  isHard = false;
+  isInfite = false;
 };
 
 const drawStartScreen = () => {
@@ -378,7 +386,7 @@ drawStartScreen();
 
 wall.addEventListener("click", () => {
   if (!isGameStarted) {
-    isWall = !isWall;
+    isWall = true;
   }
   isSpeedy = false;
   isHard = false;
@@ -388,7 +396,16 @@ wall.addEventListener("click", () => {
 });
 // speedy.addEventListener("click", () => {});
 // hard.addEventListener("click", () => {});
-// infite.addEventListener("click", () => {});
+infite.addEventListener("click", () => {
+  if (!isGameStarted) {
+    isInfite = true;
+  }
+  isWall = false;
+  isSpeedy = false;
+  isHard = false;
+
+  console.log(`isInfite: ${isInfite}`);
+});
 
 // browser listening to keypress
 document.addEventListener("keydown", changeDirection);
