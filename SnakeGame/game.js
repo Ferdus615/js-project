@@ -8,6 +8,8 @@ let direction = "RIGHT";
 let speed = 100;
 let scoreCount = 0;
 
+let gameLoop;
+
 // each section of the gameBoard
 const tileSize = 20;
 const gap = 1;
@@ -108,7 +110,7 @@ const drawSnake = () => {
 const collisionDetection = () => {
   const head = snake[0];
 
-  for (let i = 1; i <= snake.length; i++) {
+  for (let i = 1; i < snake.length; i++) {
     if (head.x === snake[i].x && head.y === snake[i].y) {
       return true;
     }
@@ -126,8 +128,27 @@ const drawGame = () => {
   }
 };
 
-const reset = () => {};
+const resetSnake = () => {
+  snake.length = 0;
+  snake.push(
+    { x: 15 * tileSize, y: 15 * tileSize },
+    { x: 14 * tileSize, y: 15 * tileSize },
+    { x: 13 * tileSize, y: 15 * tileSize }
+  );
+
+  direction = "RIGHT";
+  scoreCount = 0;
+  score.textContent = scoreCount;
+  drawApple();
+
+  clearInterval(gameLoop);
+  gameLoop = setInterval(drawGame, speed);
+};
+
+resetBtn.addEventListener("click", () => {
+  resetSnake();
+});
 
 // browser listening to keypress
 document.addEventListener("keydown", changeDirection);
-const gameLoop = setInterval(drawGame, speed);
+gameLoop = setInterval(drawGame, speed);
