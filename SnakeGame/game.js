@@ -102,6 +102,10 @@ const changeDirection = (e) => {
   if (e.code === "Space") {
     isPaused = !isPaused;
   }
+
+  if (key === "enter") {
+    gameStart();
+  }
 };
 
 const drawSnake = () => {
