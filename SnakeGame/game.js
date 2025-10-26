@@ -6,6 +6,11 @@ const startBtn = document.getElementById("startBtn");
 const pauseBtn = document.getElementById("pauseBtn");
 const resetBtn = document.getElementById("resetBtn");
 
+const up = document.getElementById("up");
+const left = document.getElementById("left");
+const down = document.getElementById("down");
+const right = document.getElementById("right");
+
 let direction = "RIGHT";
 let speed = 100;
 let scoreCount = 0;
@@ -37,8 +42,26 @@ const applePosition = () => {
 let apple = applePosition();
 
 const drawApple = () => {
-  ctx.fillStyle = "red";
-  ctx.fillRect(apple.x, apple.y, segmentSize, segmentSize);
+  // Calculate the center and radius of the circle
+  const centerX = apple.x + tileSize / 2;
+  const centerY = apple.y + tileSize / 2;
+  const radius = segmentSize / 2;
+
+  ctx.fillStyle = "#f5e612";
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+  ctx.fill();
+};
+
+const drawSnake = () => {
+  snake.forEach((segment, index) => {
+    if (index === 0) {
+      ctx.fillStyle = "#f5e612";
+    } else {
+      ctx.fillStyle = "#341bef";
+    }
+    ctx.fillRect(segment.x, segment.y, segmentSize, segmentSize);
+  });
 };
 
 const updateScore = () => {
@@ -100,7 +123,7 @@ const changeDirection = (e) => {
     direction = "DOWN";
 
   if (e.code === "Space") {
-    isPaused = !isPaused;
+    pauseGame();
   }
 
   if (key === "enter") {
@@ -108,14 +131,29 @@ const changeDirection = (e) => {
   }
 };
 
-const drawSnake = () => {
-  snake.forEach((segment, index) => {
-    if (index === 0) {
-      ctx.fillStyle = "skyblue";
-    } else {
-      ctx.fillStyle = "blue";
+const displayArrowKey = () => {
+  up.addEventListener("click", () => {
+    if (direction !== "DOWN") {
+      direction = "UP";
     }
-    ctx.fillRect(segment.x, segment.y, segmentSize, segmentSize);
+  });
+
+  left.addEventListener("click", () => {
+    if (direction !== "RIGHT") {
+      direction = "LEFT";
+    }
+  });
+
+  down.addEventListener("click", () => {
+    if (direction !== "UP") {
+      direction = "DOWN";
+    }
+  });
+
+  right.addEventListener("click", () => {
+    if (direction !== "LEFT") {
+      direction = "RIGHT";
+    }
   });
 };
 
@@ -131,12 +169,7 @@ const collisionDetection = () => {
 
 const drawGame = () => {
   if (isPaused) {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    ctx.font = "40px Bitcount Grid Single, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("PAUSED", canvas.width / 2, canvas.height / 2);
+    pauseScreen();
     return;
   }
 
@@ -196,12 +229,30 @@ const pauseGame = () => {
   }
 };
 
+const pauseScreen = () => {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  ctx.font = "40px Bitcount Grid Single, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("PAUSED", canvas.width / 2, canvas.height / 2);
+
+  ctx.fillStyle = "white";
+  ctx.font = "20px Bitcount Grid Single, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(
+    "Press 'Space' to Pause/Resume",
+    canvas.width / 2,
+    canvas.height / 2 + 40
+  );
+};
+
 pauseBtn.addEventListener("click", () => {
   pauseGame();
 });
 
 function gameOver() {
-  clearInterval(gameLoop); // stop the loop
+  clearInterval(gameLoop);
 
   ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -211,9 +262,43 @@ function gameOver() {
   ctx.textAlign = "center";
   ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
 
-  // Optional: console log or alert
+  ctx.fillStyle = "white";
+  ctx.font = "20px Bitcount Grid Single, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(
+    "Please restart the game!",
+    canvas.width / 2,
+    canvas.height / 2 + 40
+  );
+
   console.log("Game Over!");
 }
 
+const drawStartScreen = () => {
+  if (!isGameStarted) {
+    ctx.fillStyle = "white";
+    ctx.font = "20px Bitcount Grid Single, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      "Press ENTER to Begin",
+      canvas.width / 2,
+      canvas.height / 2 - 40
+    );
+    ctx.fillText(
+      "Use 'W,A,S,D' or 'Arrow key' to move",
+      canvas.width / 2,
+      canvas.height / 2
+    );
+    ctx.fillText(
+      "Use 'Space' to Pause/Resume",
+      canvas.width / 2,
+      canvas.height / 2 + 40
+    );
+  }
+};
+
+drawStartScreen();
+
 // browser listening to keypress
 document.addEventListener("keydown", changeDirection);
+document.addEventListener("click", displayArrowKey);
