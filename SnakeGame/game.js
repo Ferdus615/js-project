@@ -384,7 +384,7 @@ const drawStartScreen = () => {
     ctx.font = "20px Tiny5, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText(
-      "Press ENTER to Begin",
+      "Press SHIFT to Begin",
       canvas.width / 2,
       canvas.height / 2 - 40
     );
