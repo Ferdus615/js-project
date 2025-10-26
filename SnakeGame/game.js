@@ -2,7 +2,7 @@
 const canvas = document.getElementById("gameBoard");
 const ctx = canvas.getContext("2d");
 const score = document.getElementById("score");
-const reset = document.getElementById("resetBtn");
+const resetBtn = document.getElementById("resetBtn");
 
 let direction = "RIGHT";
 let speed = 100;
@@ -76,8 +76,9 @@ const moveSnake = () => {
   if (head.x === apple.x && head.y === apple.y) {
     apple = applePosition();
     updateScore();
+  } else {
+    snake.pop();
   }
-  snake.pop();
 };
 
 const changeDirection = (e) => {
@@ -104,13 +105,29 @@ const drawSnake = () => {
   });
 };
 
+const collisionDetection = () => {
+  const head = snake[0];
+
+  for (let i = 1; i <= snake.length; i++) {
+    if (head.x === snake[i].x && head.y === snake[i].y) {
+      return true;
+    }
+  }
+};
+
 const drawGame = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawApple();
   moveSnake();
   drawSnake();
+
+  if (collisionDetection()) {
+    clearInterval(gameLoop);
+  }
 };
+
+const reset = () => {};
 
 // browser listening to keypress
 document.addEventListener("keydown", changeDirection);
-setInterval(drawGame, speed);
+const gameLoop = setInterval(drawGame, speed);
