@@ -16,8 +16,6 @@ const speedy = document.getElementById("speed");
 const hard = document.getElementById("hard");
 const infite = document.getElementById("infite");
 
-score.textContent = `Score: 0`;
-
 let isWall = false;
 let isSpeedy = false;
 let isHard = false;
@@ -237,41 +235,55 @@ const drawGame = () => {
   }
 };
 
-const resetGame = () => {
-  snake.length = 0;
-  snake.push(
-    { x: 15 * tileSize, y: 15 * tileSize },
-    { x: 14 * tileSize, y: 15 * tileSize },
-    { x: 13 * tileSize, y: 15 * tileSize }
-  );
+const startGameSetup = () => {
+  isGameStarted = true;
+  startBtn.textContent = "Finish Game";
 
-  direction = "RIGHT";
-  scoreCount = 0;
-  score.textContent = scoreCount;
-  drawApple();
+  resetGame();
 
-  console.log("game reset");
+  console.log(`isGameStarted: ${isGameStarted}`);
+};
+
+const finishGameSetup = () => {
+  isGameStarted = false;
+  isPaused = false;
 
   clearInterval(gameLoop);
-  gameLoop = setInterval(drawGame, speed);
+  startBtn.textContent = "Start Game";
+
+  drawStartScreen();
+
+  console.log(`isGameStarted: ${isGameStarted}`);
+};
+
+const gameStart = () => {
+  !isGameStarted ? startGameSetup() : finishGameSetup();
+};
+
+const resetGame = () => {
+  if (isGameStarted) {
+    snake.length = 0;
+    snake.push(
+      { x: 15 * tileSize, y: 15 * tileSize },
+      { x: 14 * tileSize, y: 15 * tileSize },
+      { x: 13 * tileSize, y: 15 * tileSize }
+    );
+
+    direction = "RIGHT";
+    scoreCount = 0;
+    score.textContent = `Score: ${scoreCount}`;
+    drawApple();
+
+    console.log("game reset");
+
+    clearInterval(gameLoop);
+    gameLoop = setInterval(drawGame, speed);
+  }
 };
 
 resetBtn.addEventListener("click", () => {
   resetGame();
 });
-
-const gameStart = () => {
-  isGameStarted = !isGameStarted;
-
-  isGameStarted
-    ? (startBtn.textContent = "Finish Game")
-    : (startBtn.textContent = "Start Game");
-
-  clearInterval(gameLoop);
-  gameLoop = setInterval(drawGame, speed);
-  drawStartScreen();
-  console.log(`isGameStarted: ${isGameStarted}`);
-};
 
 startBtn.addEventListener("click", () => {
   gameStart();
@@ -336,6 +348,9 @@ const gameOver = () => {
 
 const drawStartScreen = () => {
   if (!isGameStarted) {
+    ctx.fillStyle = "rgba(236, 19, 164, 1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     ctx.fillStyle = "white";
     ctx.font = "20px Tiny5, sans-serif";
     ctx.textAlign = "center";
