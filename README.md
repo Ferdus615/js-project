@@ -7,6 +7,7 @@ This repository is a gallery for my JavaScript practice project you can visit th
 * Counter_App - https://counterappfer615.netlify.app/
 * Dice_Roller_Game - https://dicerollerfer615.netlify.app/
 * Password_Generator - https://passgeneratorfer615.netlify.app/
+* SnakeGame - http://snakegamefer615.netlify.app/
 * Stop_Watch - https://stopwatchfer615.netlify.app/
 * Tic_Tac_Toe - https://tictactoefer615.netlify.app/
 
