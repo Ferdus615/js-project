@@ -11,6 +11,7 @@ let speed = 100;
 let scoreCount = 0;
 
 let gameLoop;
+let isPaused = false;
 
 // each section of the gameBoard
 const tileSize = 20;
@@ -120,6 +121,16 @@ const collisionDetection = () => {
 };
 
 const drawGame = () => {
+  if (isPaused) {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    ctx.font = "40px Bitcount Grid Single, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("PAUSED", canvas.width / 2, canvas.height / 2);
+    return;
+  }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawApple();
   moveSnake();
@@ -131,7 +142,7 @@ const drawGame = () => {
   }
 };
 
-const resetSnake = () => {
+const resetGame = () => {
   snake.length = 0;
   snake.push(
     { x: 15 * tileSize, y: 15 * tileSize },
@@ -144,25 +155,33 @@ const resetSnake = () => {
   score.textContent = scoreCount;
   drawApple();
 
+  console.log("game reset");
+
   clearInterval(gameLoop);
   gameLoop = setInterval(drawGame, speed);
 };
 
-const pauseGame = () => {
-  clearInterval
-}
+resetBtn.addEventListener("click", () => {
+  resetGame();
+});
 
 const gameStart = () => {
   clearInterval(gameLoop);
   gameLoop = setInterval(drawGame, speed);
+  console.log("game started");
 };
 
 startBtn.addEventListener("click", () => {
   gameStart();
 });
 
-resetBtn.addEventListener("click", () => {
-  resetSnake();
+const pauseGame = () => {
+  isPaused = !isPaused;
+  console.log("Paused:", isPaused);
+};
+
+pauseBtn.addEventListener("click", () => {
+  pauseGame();
 });
 
 function gameOver() {
