@@ -11,6 +11,7 @@ let speed = 100;
 let scoreCount = 0;
 
 let gameLoop;
+let isGameStarted = false;
 let isPaused = false;
 
 // each section of the gameBoard
@@ -97,6 +98,10 @@ const changeDirection = (e) => {
     direction = "UP";
   else if ((key === "arrowdown" || key === "s") && direction !== "UP")
     direction = "DOWN";
+
+  if (e.code === "Space") {
+    isPaused = !isPaused;
+  }
 };
 
 const drawSnake = () => {
@@ -166,6 +171,8 @@ resetBtn.addEventListener("click", () => {
 });
 
 const gameStart = () => {
+  isGameStarted = !isGameStarted;
+
   clearInterval(gameLoop);
   gameLoop = setInterval(drawGame, speed);
   console.log("game started");
@@ -176,8 +183,13 @@ startBtn.addEventListener("click", () => {
 });
 
 const pauseGame = () => {
-  isPaused = !isPaused;
-  console.log("Paused:", isPaused);
+  if (isGameStarted) {
+    isPaused = !isPaused;
+    isPaused
+      ? (pauseBtn.textContent = "Resume Game")
+      : (pauseBtn.textContent = "Pause Game");
+    console.log("Paused:", isPaused);
+  }
 };
 
 pauseBtn.addEventListener("click", () => {

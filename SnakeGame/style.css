@@ -21,6 +21,12 @@ body {
   font-size: 35px;
 }
 
+.btns {
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .startBtn {
   width: 100px;
   height: 40px;
