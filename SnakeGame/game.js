@@ -11,6 +11,18 @@ const left = document.getElementById("left");
 const down = document.getElementById("down");
 const right = document.getElementById("right");
 
+const wall = document.getElementById("wall");
+const speedy = document.getElementById("speed");
+const hard = document.getElementById("hard");
+const infite = document.getElementById("infite");
+
+score.textContent = `Score: 0`;
+
+let isWall = false;
+let isSpeedy = false;
+let isHard = false;
+let isInfite = false;
+
 let direction = "RIGHT";
 let speed = 100;
 let scoreCount = 0;
@@ -72,40 +84,80 @@ const updateScore = () => {
 const moveSnake = () => {
   const head = { ...snake[0] };
 
-  if (head.x <= canvas.width || head.y <= canvas.height) {
-    switch (direction) {
-      case "RIGHT":
-        head.x += tileSize;
-        if (head.x >= canvas.width) {
-          head.x = 0;
-        }
-        break;
-      case "LEFT":
-        head.x -= tileSize;
-        if (head.x < 0) {
-          head.x = canvas.width - tileSize;
-        }
-        break;
-      case "UP":
-        head.y -= tileSize;
-        if (head.y < 0) {
-          head.y = canvas.height - tileSize;
-        }
-        break;
-      case "DOWN":
-        head.y += tileSize;
-        if (head.y >= canvas.height) {
-          head.y = 0;
-        }
-        break;
+  if (!isWall) {
+    if (head.x <= canvas.width || head.y <= canvas.height) {
+      switch (direction) {
+        case "RIGHT":
+          head.x += tileSize;
+          if (head.x >= canvas.width) {
+            head.x = 0;
+          }
+          break;
+        case "LEFT":
+          head.x -= tileSize;
+          if (head.x < 0) {
+            head.x = canvas.width - tileSize;
+          }
+          break;
+        case "UP":
+          head.y -= tileSize;
+          if (head.y < 0) {
+            head.y = canvas.height - tileSize;
+          }
+          break;
+        case "DOWN":
+          head.y += tileSize;
+          if (head.y >= canvas.height) {
+            head.y = 0;
+          }
+          break;
+      }
+    }
+  } else {
+    if (head.x <= canvas.width || head.y <= canvas.height) {
+      switch (direction) {
+        case "RIGHT":
+          head.x += tileSize;
+          if (head.x >= canvas.width) {
+            gameOver();
+          }
+          break;
+        case "LEFT":
+          head.x -= tileSize;
+          if (head.x < 0) {
+            gameOver();
+          }
+          break;
+        case "UP":
+          head.y -= tileSize;
+          if (head.y < 0) {
+            gameOver();
+          }
+          break;
+        case "DOWN":
+          head.y += tileSize;
+          if (head.y >= canvas.height) {
+            gameOver();
+          }
+          break;
+      }
     }
   }
 
-  snake.unshift(head);
-  if (head.x === apple.x && head.y === apple.y) {
-    apple = applePosition();
-    updateScore();
+  if (!isInfite) {
+    snake.unshift(head);
+    if (head.x === apple.x && head.y === apple.y) {
+      apple = applePosition();
+      updateScore();
+    } else {
+      snake.pop();
+    }
   } else {
+    snake.unshift(head);
+    if (head.x === apple.x && head.y === apple.y) {
+      apple = applePosition();
+      updateScore();
+    }
     snake.pop();
   }
 };
@@ -211,9 +263,14 @@ resetBtn.addEventListener("click", () => {
 const gameStart = () => {
   isGameStarted = !isGameStarted;
 
+  isGameStarted
+    ? (startBtn.textContent = "Finish Game")
+    : (startBtn.textContent = "Start Game");
+
   clearInterval(gameLoop);
   gameLoop = setInterval(drawGame, speed);
-  console.log("game started");
+  drawStartScreen();
+  console.log(`isGameStarted: ${isGameStarted}`);
 };
 
 startBtn.addEventListener("click", () => {
@@ -252,7 +309,7 @@ pauseBtn.addEventListener("click", () => {
   pauseGame();
 });
 
-function gameOver() {
+const gameOver = () => {
   clearInterval(gameLoop);
 
   ctx.fillStyle = "rgba(236, 19, 164, 1)";
@@ -272,8 +329,10 @@ function gameOver() {
     canvas.height / 2 + 40
   );
 
+  isPaused = false;
+  isGameStarted = false;
   console.log("Game Over!");
-}
+};
 
 const drawStartScreen = () => {
   if (!isGameStarted) {
@@ -301,6 +360,20 @@ const drawStartScreen = () => {
 };
 
 drawStartScreen();
+
+wall.addEventListener("click", () => {
+  if (!isGameStarted) {
+    isWall = !isWall;
+  }
+  isSpeedy = false;
+  isHard = false;
+  isInfite = false;
+
+  console.log(`isWall: ${isWall}`);
+});
+// speedy.addEventListener("click", () => {});
+// hard.addEventListener("click", () => {});
+// infite.addEventListener("click", () => {});
 
 // browser listening to keypress
 document.addEventListener("keydown", changeDirection);
