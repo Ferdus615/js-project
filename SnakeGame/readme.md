@@ -1,6 +1,11 @@
 ````markdown
 # Hi, Welcome to the documentation of my SnakeGame 🐍. I ma Ferdus Rhaman Khan and this is my obsession over little details in simple things.
 ````
+<p align="center">
+  <img src="./btn/favicon.svg" alt="Preview" width="200">
+</p>
+
+
 # 🐍 Snake Game — Technical Documentation
 
 ## 📘 Overview
