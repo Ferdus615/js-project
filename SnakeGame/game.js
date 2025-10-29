@@ -43,26 +43,64 @@ const snake = [
   { x: 13 * tileSize, y: 15 * tileSize },
 ];
 
-const boardGridFunction = () => {
+const boardGridPosition = () => {
   for (let x = 0; x < tileCount; x++) {
     for (let y = 0; y < tileCount; y++) {
-      boardGrid.push({ gridX: x, gridY: y });
+      boardGrid.push({ x: x * tileSize, y: y * tileSize });
     }
   }
 
   console.log(boardGrid);
 };
 
-boardGridFunction();
+boardGridPosition();
 
 const applePosition = () => {
-  posX = Math.floor((Math.random() * canvas.width) / tileSize);
-  posY = Math.floor((Math.random() * canvas.height) / tileSize);
-  return {
-    x: posX * tileSize,
-    y: posY * tileSize,
-  };
+  snakePositonSet = new Set();
+
+  snake.forEach((segment, index) => {
+    ele = `${segment.x}, ${segment.y}`;
+    snakePositonSet.add(ele);
+  });
+
+  console.log(snakePositonSet);
+
+  const emptyGridPos = [];
+
+  boardGrid.forEach((pos, index) => {
+    const posItem = `${pos.x}, ${pos.y}`;
+
+    // console.log(`posItem: ${posItem}`);
+
+    if (!snakePositonSet.has(posItem)) emptyGridPos.push(posItem);
+  });
+
+  // console.log(emptyGridPos);
+
+  if (emptyGridPos.length < 1) gameOver();
+  else {
+    const randomIndex = Math.floor(Math.random() * emptyGridPos.length);
+    console.log(`randomIndex: ${randomIndex}`);
+
+    const randomPos = emptyGridPos[randomIndex];
+    console.log(`randomPos: ${randomPos}`);
+
+    const [x, y] = randomPos.split(",").map(Number);
+    const applePos = { x, y };
+    console.log(applePos);
+
+    return applePos;
+  }
 };
+
+// const applePosition = () => {
+//   posX = Math.floor((Math.random() * canvas.width) / tileSize);
+//   posY = Math.floor((Math.random() * canvas.height) / tileSize);
+//   return {
+//     x: posX * tileSize,
+//     y: posY * tileSize,
+//   };
+// };
 
 let apple = applePosition();
 
