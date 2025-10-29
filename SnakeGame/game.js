@@ -31,14 +31,29 @@ let isPaused = false;
 
 // each section of the gameBoard
 const tileSize = 20;
+const tileCount = canvas.width / tileSize;
 const gap = 1;
 const segmentSize = tileSize - gap * 2;
+
+const boardGrid = [];
 
 const snake = [
   { x: 15 * tileSize, y: 15 * tileSize },
   { x: 14 * tileSize, y: 15 * tileSize },
   { x: 13 * tileSize, y: 15 * tileSize },
 ];
+
+const boardGridFunction = () => {
+  for (let x = 0; x < tileCount; x++) {
+    for (let y = 0; y < tileCount; y++) {
+      boardGrid.push({ gridX: x, gridY: y });
+    }
+  }
+
+  console.log(boardGrid);
+};
+
+boardGridFunction();
 
 const applePosition = () => {
   posX = Math.floor((Math.random() * canvas.width) / tileSize);
